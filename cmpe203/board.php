@@ -56,14 +56,14 @@ $row = mysql_fetch_array($result);
 				$row3 = mysql_fetch_array($result3);
 				
 				if(mysql_num_rows($result3)>=1){
-					echo"<article class='white-panel' style='background-color: rgba(255,255,255,0.6);'> <img src='".$row2['tack_image']."' alt='ALT'>";
+					echo"<article class='white-panel' style='background-color: rgba(255,255,255,0.6);'> <a href='".$row2['tack_url']."' target='_blank'><img src='".$row2['tack_image']."' alt='ALT'></a>";
 					echo"<h1><a href='".$row2['tack_url']."' target='_blank'>".$row2['tack_title']."</a></h1>";
 					echo"<p>".$row2['tack_description']."</p>";
 					echo"<p style='float:left;font-size:11px;'><a href='unlike_tack.php?tack_id=".$row2['id']."&&board_id=".$board_id."' style='color:#48649F;text-decoration:none;'><b>Unlike</b></a></p>";
 					echo"</article>";
 				}
 				else{
-					echo"<article class='white-panel' style='background-color: rgba(255,255,255,0.6);'> <img src='".$row2['tack_image']."' alt='ALT'>";
+					echo"<article class='white-panel' style='background-color: rgba(255,255,255,0.6);'> <a href='".$row2['tack_url']."' target='_blank'><img src='".$row2['tack_image']."' alt='ALT'></a>";
 					echo"<h1><a href='".$row2['tack_url']."' target='_blank'>".$row2['tack_title']."</a></h1>";
 					echo"<p>".$row2['tack_description']."</p>";
 					
@@ -82,7 +82,7 @@ $row = mysql_fetch_array($result);
 				
 				/*Show 'add tack' link if the tack is owned by user.*/
 				if($user_id == $row['uid']){
-					echo"<article class='white-panel' style='background-color: rgba(255,255,255,0.6);'> <img src='images/add.png' alt='ALT'>";
+					echo"<article class='white-panel' style='background-color: rgba(255,255,255,0.6);'> <a href='addtack.php?board_id=".$row['id']."'><img src='images/add.png' alt='ALT'></a>";
 					echo"<h1><a href='addtack.php?board_id=".$row['id']."'>Add Tack</a></h1>";
 					echo"<p>Add a new Tack to this board.</p>";
 					echo"</article>";

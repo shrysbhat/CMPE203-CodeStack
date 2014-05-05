@@ -47,7 +47,7 @@ $result = mysql_query("SELECT * FROM boards WHERE privacy=0 OR uid=$user_id") or
 			$row2 = mysql_fetch_array($result2);
 			
 			if(mysql_num_rows($result2)>=1){
-				echo"<article class='white-panel'> <img src='".$row['board_image']."' alt='ALT'>";
+				echo"<article class='white-panel'> <a href='".$row['board_url']."?board_id=".$row['id']."'><img src='".$row['board_image']."' alt='ALT'></a>";
 				echo"<h1><a href='".$row['board_url']."?board_id=".$row['id']."'>".$row['board_title']."</a></h1>";
 				echo"<p>".$row['board_description']."</p>";
 				echo"<p style='float:left;font-size:11px;'><a href='unfollow_board.php?board_id=".$row['id']."' style='color:#48649F;;text-decoration:none;'><b>Unfollow</b></a></p>";
@@ -56,7 +56,7 @@ $result = mysql_query("SELECT * FROM boards WHERE privacy=0 OR uid=$user_id") or
 			
 			/*if user not following the board show the 'follow' link*/
 			else{
-				echo"<article class='white-panel'> <img src='".$row['board_image']."' alt='ALT'>";
+				echo"<article class='white-panel'> <a href='".$row['board_url']."?board_id=".$row['id']."'><img src='".$row['board_image']."' alt='ALT'></a>";
 				echo"<h1><a href='".$row['board_url']."?board_id=".$row['id']."'>".$row['board_title']."</a></h1>";
 				echo"<p>".$row['board_description']."</p>";
 					if($user_id != $row['uid']){
