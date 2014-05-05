@@ -37,7 +37,7 @@ if(isset($_POST['submit'])) {
 		if (file_exists("images/user_images/" . $_FILES["file"]["name"])) {
 			echo "<script type = 'text/javascript'>";
 			echo "alert('Image already exists!')";
-			echo "</script>"
+			echo "</script>";
 		} else {
 		  move_uploaded_file($_FILES["file"]["tmp_name"],
 		  "images/user_images/" . $_FILES["file"]["name"]);
