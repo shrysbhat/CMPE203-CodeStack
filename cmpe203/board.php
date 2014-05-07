@@ -2,10 +2,20 @@
 include('header.php');
 include('db.php');
 
-/*Get board id from query string*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  Get board id from query string
+  */
 $board_id = $_GET['board_id'];
 
-/*Query to get board id, to display associated tacks*/
+/**
+  * @author  (Morvin Shah)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  Query to get board id, to display associated tacks
+  */
 $query = "SELECT * FROM boards WHERE id=$board_id";
 $result = mysql_query($query) or die(mysql_error());
 $row = mysql_fetch_array($result);
@@ -16,15 +26,17 @@ $row = mysql_fetch_array($result);
 		<title>
 			<?php echo"Board - ".$row['board_title']; ?>
 		</title>
-		
-		<!--including css files-->
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v1.0
+  * @date     (20-April-2014)
+  * @Description  including css files, js plugins and js code for setting size of tacks
+  -->			
 		<link rel="stylesheet" href="css/main.css" type="text/css">
 		
-		<!--including js plugin files-->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="js/pinterest_grid.js"></script>
 		
-		<!--js code for setting size of tacks-->
 		<script type = "text/javascript">
 			$(document).ready(function() {
 			$('#demo').pinterest_grid({
@@ -42,7 +54,12 @@ $row = mysql_fetch_array($result);
 		<section id="demo" style = "margin-top:5%;">
 			<?php
 			
-				/*query to display all tacks of specific board*/
+/**
+  * @author  (Morvin Shah)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  query to display all tacks of specific board
+  */
 				$query2 = "SELECT * FROM tacks WHERE bid=$board_id";
 				$result2 = mysql_query($query2) or die(mysql_error());
 				

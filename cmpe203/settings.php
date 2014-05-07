@@ -6,7 +6,12 @@ include('db.php');
 $result = mysql_query("SELECT * FROM login WHERE id=$user_id") or die(mysql_error());
 $row = mysql_fetch_array($result);
 
-/*on button press*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  on button press
+  */
 if(isset($_POST['submit'])) {
 	
 	/*set the value of textfield in variable*/
@@ -29,7 +34,12 @@ if(isset($_POST['submit'])) {
 ?>
 
 <html>
-	
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v2.0
+  * @date     (21-April-2014)
+  * @Description  UI for settings page
+  -->	
 	<head>
 		<title>
 			Settings

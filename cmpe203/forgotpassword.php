@@ -2,7 +2,12 @@
 session_start();
 include('db.php');
 
-/*On button press*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  On button press
+  */
 if(isset($_POST['send_email']))
 {
 	/*Store textfield value in variable*/
@@ -61,6 +66,12 @@ if(isset($_POST['send_email']))
 
 <!DOCTYPE html>
 <html lang="en">
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v2.0
+  * @date     (21-April-2014)
+  * @Description  change password page UI
+  -->
   <head>
     <meta charset="utf-8">
     <title>Welcome to MyTacks</title>
@@ -110,6 +121,7 @@ if(isset($_POST['send_email']))
       Don't have an account yet? <a href="register.php" class="btn btn-black">Register</a>
     </footer>
 	
+	<!--including js files in the end so the page loads faster-->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/backstretch.min.js"></script>

@@ -2,12 +2,16 @@
 /* ##########  */
 /*   $GLOBAL   */
 /* ##########  */
-/* line 10, ../sass/typica-login.scss */
+
+/**
+  * @author  (Pratik Gaglani)
+  * @version  v3.0
+  * @date     (17-April-2014)
+  */
 html {
   height: 100%;
 }
 
-/* line 13, ../sass/typica-login.scss */
 body {
   background: url(../bg1.png) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -16,18 +20,15 @@ body {
   background-size: cover;
 }
 @media (min-width: 979px) {
-  /* line 13, ../sass/typica-login.scss */
   body {
     padding-top: 80px;
   }
 }
 
-/* line 21, ../sass/typica-login.scss */
 .blue {
   color: #033298;
 }
 
-/* line 25, ../sass/typica-login.scss */
 .btn-black {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -38,7 +39,7 @@ body {
   color: white;
   text-shadow: none;
 }
-/* line 33, ../sass/typica-login.scss */
+
 .btn-black:hover {
   background: #333333;
   color: white;
@@ -47,39 +48,39 @@ body {
 /* ########### */
 /* $NAVIGATION */
 /* ########### */
-/* line 43, ../sass/typica-login.scss */
+
 .navbar .brand {
   margin-top: 20px;
   padding-bottom: 8px;
   max-height: 40px;
   width: auto;
 }
-/* line 49, ../sass/typica-login.scss */
+
 .navbar .navbar-inner {
   height: 80px;
   background: white;
   filter: none;
 }
-/* line 54, ../sass/typica-login.scss */
+
 .navbar .nav {
   margin-top: 20px;
 }
-/* line 56, ../sass/typica-login.scss */
+
 .navbar .nav > li > a {
   padding: 10px 10px 11px;
   color: #333;
   text-shadow: none;
 }
-/* line 63, ../sass/typica-login.scss */
+
 .navbar .nav > li > a:hover {
   color: #111;
 }
-/* line 67, ../sass/typica-login.scss */
+
 .navbar .nav > li.active > a {
   background: none;
   color: #111;
 }
-/* line 70, ../sass/typica-login.scss */
+
 .navbar .nav > li.active > a:hover {
   background: none;
   color: #111;
@@ -88,7 +89,7 @@ body {
 /* ####### */
 /* $LOGIN  */
 /* ####### */
-/* line 80, ../sass/typica-login.scss */
+
 #login-wraper {
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;

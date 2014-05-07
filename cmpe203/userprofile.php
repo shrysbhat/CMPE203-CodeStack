@@ -2,14 +2,24 @@
 include('header.php');
 include('db.php');
 
-/*get info of user from login table*/
-$query = "SELECT * FROM login WHERE id=$user_id";
+$user = $_GET['user_id'];
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  get info of user from login table
+  */
+$query = "SELECT * FROM login WHERE id=$user";
 $result = mysql_query($query) or die(mysql_error());
 $row = mysql_fetch_array($result);
 
 /*get all boards created by user*/
-$query2 = "SELECT * FROM boards WHERE uid=$user_id";
+$query2 = "SELECT * FROM boards WHERE uid=$user";
 $result2 = mysql_query($query2) or die(mysql_error());
+
+/**/
+$query3 = "SELECT * FROM follow_user WHERE uid=$user_id AND following_uid=$user";
+$result3 = mysql_query($query3) or die(mysql_error());
 ?>
 
 <html>
@@ -61,6 +71,22 @@ $result2 = mysql_query($query2) or die(mysql_error());
 						</tr>
 					</table>
 					</div>
+					<div>
+						<?php
+							if(mysql_num_rows($result3)==1){
+								?>
+								<a href="unfollow_user.php?user_id=<?php echo $user; ?>" style="color: #ffffff;text-decoration: none;font-size: 11px;">Unfollow</a>
+								<?php
+							}
+							elseif($user_id==$user){
+							}
+							else{
+								?>
+								<a href="follow_user.php?user_id=<?php echo $user; ?>" style="color: #ffffff;text-decoration: none;font-size: 11px;">Follow</a>
+								<?php
+							}
+						?>
+					</div>
 				</div>
 			</center>
 		</section>
@@ -71,8 +97,13 @@ $result2 = mysql_query($query2) or die(mysql_error());
 			<?php
 			while($row2 = mysql_fetch_array( $result2 )) {
 			
-			/*display all boards created by user*/
-			echo"<article class='white-panel'> <img src='".$row2['board_image']."' alt='ALT'>";
+/**
+  * @author  (Amod Rege and Pratik Gaglani)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  display all boards created by user
+  */
+			echo"<article class='white-panel'> <a href='".$row2['board_url']."?board_id=".$row2['id']."'><img src='".$row2['board_image']."' alt='ALT'></a>";
 			echo"<h1><a href='".$row2['board_url']."?board_id=".$row2['id']."'>".$row2['board_title']."</a></h1>";
 			echo"<p>".$row2['board_description']."</p>";
 			echo"</article>";

@@ -1,4 +1,10 @@
 <?php
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (23-April-2014)
+  * @Description  Database connection
+  */
 $dbhost = 'localhost'; 			//host name
 $dbuser = 'itech_cmpe203'; 		//username
 $dbpass = '#mp+TPGZe.KK'; 		//password

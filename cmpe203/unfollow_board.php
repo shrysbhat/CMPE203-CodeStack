@@ -1,6 +1,11 @@
 <?php
 session_start();
-
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  maintaining session
+  */
 $user_id = $_SESSION['id'];
 if($user_id == NULL)
 {

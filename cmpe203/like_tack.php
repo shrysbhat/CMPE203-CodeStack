@@ -9,8 +9,12 @@ if($user_id == NULL)
 	echo"</script>";
 }
 include('db.php');
-
-/*get tack id and board id from query string*/
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  get tack id and board id from query string
+  */
 $tack_id=$_GET['tack_id'];
 $board_id=$_GET['board_id'];
 

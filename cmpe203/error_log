@@ -22,3 +22,6 @@
 [05-May-2014 02:24:50] PHP Warning:  mysql_fetch_array(): supplied argument is not a valid MySQL result resource in /home1/itech/public_html/cmpe203/search.php on line 39
 [05-May-2014 03:52:18] PHP Parse error:  syntax error, unexpected T_ENCAPSED_AND_WHITESPACE, expecting T_STRING or T_VARIABLE or T_NUM_STRING in /home1/itech/public_html/cmpe203/forgotpassword.php on line 30
 [05-May-2014 04:13:02] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ',' or ';' in /home1/itech/public_html/cmpe203/search.php on line 46
+[05-May-2014 17:52:30] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home1/itech/public_html/cmpe203/editprofile.php on line 41
+[05-May-2014 17:54:19] PHP Parse error:  syntax error, unexpected '}', expecting ',' or ';' in /home1/itech/public_html/cmpe203/editprofile.php on line 41
+[06-May-2014 23:32:28] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ',' or ';' in /home1/itech/public_html/cmpe203/home.php on line 54

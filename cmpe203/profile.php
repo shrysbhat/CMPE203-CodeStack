@@ -2,7 +2,12 @@
 include('header.php');
 include('db.php');
 
-/*get info of user from login table*/
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  get info of user from login table
+  */
 $query = "SELECT * FROM login WHERE id=$user_id";
 $result = mysql_query($query) or die(mysql_error());
 $row = mysql_fetch_array($result);
@@ -74,8 +79,13 @@ $result2 = mysql_query($query2) or die(mysql_error());
 			<?php
 			while($row2 = mysql_fetch_array( $result2 )) {
 			
-			/*display all boards created by user with link to edit or delete that board*/
-			echo"<article class='white-panel'> <img src='".$row2['board_image']."' alt='ALT'>";
+/**
+  * @author  (Amod Rege and Archit Agarwal)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  display all boards created by user with link to edit or delete that board
+  */
+			echo"<article class='white-panel'> <a href='".$row2['board_url']."?board_id=".$row2['id']."'><img src='".$row2['board_image']."' alt='ALT'></a>";
 			echo"<h1><a href='".$row2['board_url']."?board_id=".$row2['id']."'>".$row2['board_title']."</a></h1>";
 			echo"<p>".$row2['board_description']."</p>";
 			echo"<p style='float:left;font-size:11px;'><a href='deleteboard.php?board_id=".$row2['id']."' style='color:#000;text-decoration:none;'><b>Delete</b></a></p><p align='right' style='font-size:11px;'><a href='editboard.php?board_id=".$row2['id']."' style='color:#000;text-decoration:none;'><b>Edit</b></a></p>";

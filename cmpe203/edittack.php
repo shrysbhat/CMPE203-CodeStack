@@ -7,12 +7,22 @@ $tack_id = $_GET['tack_id'];
 $board_id = $_GET['board_id'];
 $board_category = $_GET['ctg'];
 
-/*query to get information of the tack to be edited*/
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (23-April-2014)
+  * @Description  query to get information of the tack to be edited
+  */
 $query = "SELECT * FROM tacks WHERE id=$tack_id";
 $result = mysql_query($query) or die(mysql_error());
 $row = mysql_fetch_array($result);
 
-/*On button press*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (25-April-2014)
+  * @Description  On button press
+  */
 if(isset($_POST['submit'])) {
 	
 	/*Store textfield values in variables*/
@@ -20,7 +30,6 @@ if(isset($_POST['submit'])) {
 	$description = $_POST['t_description'];
 	$url = $_POST['t_url'];
 	$file = $_FILES["file"]["name"];
-	$tackimage = $row['tack_image'];
 	
 	/*save tack image to specified folder with validations*/
 	$allowedExts = array("gif", "jpeg", "jpg", "png");
@@ -44,45 +53,48 @@ if(isset($_POST['submit'])) {
 			echo "alert('Image already exists!')";
 			echo "</script>";
 		} else {
-		  move_uploaded_file($_FILES["file"]["tmp_name"],
+		
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (23-April-2014)
+  * @Description  update tack info including new tack image
+  */
+		if(($title != null) && ($description != null) && ($url != null) && ($file != null)) {
+		$result2 = mysql_query("UPDATE `tacks` SET `bid`='$board_id', `tack_title`='$title', `tack_description`='$description', `tack_category`='$board_category', `tack_url`='$url', `tack_image`='images/tack_image/$file' WHERE id='$tack_id'")or die(mysql_error());
+	
+		move_uploaded_file($_FILES["file"]["tmp_name"],
 		  "images/tack_image/" . $_FILES["file"]["name"]);
+	
+		/*redirect user to board page*/
+		echo"<script type = 'text/javascript'>";
+		echo"window.location.href = 'http://itechcareers.com/cmpe203/board.php?board_id=".$board_id."'";
+		echo"</script>";
+		}
+	
+		/*error message*/
+		else{
+		echo "<script type = 'text/javascript'>";
+		echo "alert('Please enter values in all fields!')";
+		echo "</script>";
+		}
 		}
 	  }
 	} else {
-	  echo "Invalid file";
-	}
-	
-	/*update tack info including new tack image*/
-	if(($title != null) && ($description != null) && ($url != null) && ($file != null)) {
-	$result2 = mysql_query("UPDATE `tacks` SET `bid`='$board_id', `tack_title`='$title', `tack_description`='$description', `tack_category`='$board_category', `tack_url`='$url', `tack_image`='images/tack_image/$file' WHERE id='$tack_id'")or die(mysql_error());
-	
-	/*redirect user to board page*/
-	echo"<script type = 'text/javascript'>";
-	echo"window.location.href = 'http://itechcareers.com/cmpe203/board.php?board_id=".$board_id."'";
-	echo"</script>";
-	}
-	
-	/*update tack info with old tack image*/
-	else if(($title != null) && ($description != null) && ($url != null) && ($file == null)) {
-	$result2 = mysql_query("UPDATE `tacks` SET `bid`='$board_id', `tack_title`='$title', `tack_description`='$description', `tack_category`='$board_category', `tack_url`='$url', `tack_image`='$tackimage' WHERE id='$tack_id'")or die(mysql_error());
-	
-	/*redirect user to board page*/
-	echo"<script type = 'text/javascript'>";
-	echo"window.location.href = 'http://itechcareers.com/cmpe203/board.php?board_id=".$board_id."'";
-	echo"</script>";
-	}
-	
-	/*error message*/
-	else{
-	echo "<script type = 'text/javascript'>";
-	echo "alert('Please enter values in all fields!')";
-	echo "</script>";
+	  echo "<script type = 'text/javascript'>";
+	  echo "alert('Invalid Image!')";
+	  echo "</script>";
 	}
 }
 ?>
 
 <html>
-	
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v2.0
+  * @date     (18-April-2014)
+  * @Description  add tack page UI
+  -->	
 	<head>
 		<title>
 			Edit Tack

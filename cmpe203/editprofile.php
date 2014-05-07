@@ -2,12 +2,22 @@
 include('header.php');
 include('db.php');
 
-/*query to get all values from login table for the specified user*/
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (23-April-2014)
+  * @Description  query to get all values from login table for the specified user
+  */
 $query = "SELECT * FROM login WHERE id=$user_id";
 $result = mysql_query($query) or die(mysql_error());
 $row = mysql_fetch_array($result);
 
-/*On button press*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (25-April-2014)
+  * @Description  On button press
+  */
 if(isset($_POST['submit'])) {
 	
 	/*Store textfield values in variables*/
@@ -15,7 +25,6 @@ if(isset($_POST['submit'])) {
 	$last_name = $_POST['lname'];
 	$email = $_POST['email'];
 	$file = $_FILES["file"]["name"];
-	$profilepic = $row['user_image'];
 	
 	/*save profile image to specified folder with validations*/
 	$allowedExts = array("gif", "jpeg", "jpg", "png");
@@ -39,46 +48,49 @@ if(isset($_POST['submit'])) {
 			echo "alert('Image already exists!')";
 			echo "</script>";
 		} else {
-		  move_uploaded_file($_FILES["file"]["tmp_name"],
-		  "images/user_images/" . $_FILES["file"]["name"]);
+		
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (23-April-2014)
+  * @Description  update user info including new profile image
+  */
+			if(($first_name != null) && ($last_name != null) && ($email != null) && ($file != null)) {
+				$result2 = mysql_query("UPDATE `login` SET `first_name`='$first_name', `last_name`='$last_name', `email`='$email', `user_image`='images/user_images/$file' WHERE id='$user_id'")or die(mysql_error());
+	
+				move_uploaded_file($_FILES["file"]["tmp_name"],
+				"images/user_images/" . $_FILES["file"]["name"]);
+		  
+				/*redirect user to profile page*/
+				echo"<script type = 'text/javascript'>";
+				echo"window.location.href = 'http://itechcareers.com/cmpe203/profile.php'";
+				echo"</script>";
+			}
+		
+			/*error message*/
+			else{
+				echo "<script type = 'text/javascript'>";
+				echo "alert('Please enter values in all fields!')";
+				echo "</script>";
+			}  
 		}
 	  }
 	} else {
-	  echo "Invalid file";
-	}
-	
-	/*update user info including new profile image*/
-	if(($first_name != null) && ($last_name != null) && ($email != null) && ($file != null)) {
-	$result2 = mysql_query("UPDATE `login` SET `first_name`='$first_name', `last_name`='$last_name', `email`='$email', `user_image`='images/user_images/$file' WHERE id='$user_id'")or die(mysql_error());
-	
-	/*redirect user to profile page*/
-	echo"<script type = 'text/javascript'>";
-	echo"window.location.href = 'http://itechcareers.com/cmpe203/profile.php'";
-	echo"</script>";
-	}
-	
-	/*update user info including previous profile image*/
-	else if(($first_name != null) && ($last_name != null) && ($email != null) && ($file == null)) {
-	$result2 = mysql_query("UPDATE `login` SET `first_name`='$first_name', `last_name`='$last_name', `email`='$email', `user_image`='$profilepic' WHERE id='$user_id'")or die(mysql_error());
-	
-	/*redirect user to profile page*/
-	echo"<script type = 'text/javascript'>";
-	echo"window.location.href = 'http://itechcareers.com/cmpe203/profile.php'";
-	echo"</script>";
-	}
-	
-	/*error message*/
-	else{
-	echo "<script type = 'text/javascript'>";
-	echo "alert('Please enter values in all fields!')";
-	echo "</script>";
+	  echo "<script type = 'text/javascript'>";
+	  echo "alert('Invalid Image!')";
+	  echo "</script>";
 	}
 }
 
 ?>
 
 <html>
-	
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v2.0
+  * @date     (18-April-2014)
+  * @Description  add tack page UI
+  -->	
 	<head>
 		<title>
 			Edit Profile

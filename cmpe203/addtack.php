@@ -2,23 +2,46 @@
 include('header.php');
 include('db.php');
 
-/*On button press*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (25-April-2014)
+  * @Description  On button press
+  */
+
 if(isset($_POST['submit'])) {
 	
-	/*Store textfield values in variables*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (25-April-2014)
+  * @Description  Store textfield values in variables
+  */
 	$board_id = $_GET['board_id'];
 	$title = $_POST['t_title'];
-	$description = $_POST['t_description'];
-	$url = $_POST['t_url'];
+	$description1 = $_POST['t_description'];
+	$description = htmlspecialchars($description1,ENT_QUOTES);
+	$url1 = $_POST['t_url'];
+	$url = htmlspecialchars($url1,ENT_QUOTES);
 	$file = $_FILES["file"]["name"];
 	
-	/*Getting board category using query*/
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (25-April-2014)
+  * @Description  Getting board category using query
+  */	
 	$query = "SELECT * FROM boards WHERE id=$board_id";
 	$result = mysql_query($query) or die(mysql_error());
 	$row = mysql_fetch_array($result);
 	$category_board = $row['board_category'];
 	
-	/*save tack image to specified folder with validations*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v2.0
+  * @date     (1-May-2014)
+  * @Description  save tack image to specified folder with validations
+  */
 	$allowedExts = array("gif", "jpeg", "jpg", "png");
 	$temp = explode(".", $_FILES["file"]["name"]);
 	$extension = end($temp);
@@ -40,36 +63,59 @@ if(isset($_POST['submit'])) {
 			echo "alert('Image already exists!')";
 			echo "</script>";
 		  } else {
-		  move_uploaded_file($_FILES["file"]["tmp_name"],
-		  "images/tack_image/" . $_FILES["file"]["name"]);
+		  
+/**
+  * @author  (Morvin Shah)
+  * @version  v1.0
+  * @date     (25-April-2014)
+  * @Description  Insert values in boards table
+  */
+			if(($title != null) && ($description != null) && ($url != null) && ($file != null)) {
+			mysql_query("INSERT INTO tacks(bid, tack_title, tack_description, tack_category, tack_url, tack_image) VALUES('$board_id', '$title', '$description','$category_board', '$url', 'images/tack_image/$file')") or die(mysql_error());
+	
+			move_uploaded_file($_FILES["file"]["tmp_name"],
+			"images/tack_image/" . $_FILES["file"]["name"]);
+		  
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  redirect user to board page
+  */
+			echo"<script type = 'text/javascript'>";
+			echo"window.location.href = 'http://itechcareers.com/cmpe203/board.php?board_id=".$board_id."'";
+			echo"</script>";
+			}
+	
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  error message
+  */
+			else
+			{
+			echo "<script type = 'text/javascript'>";
+			echo "alert('Please enter value in all fields!')";
+			echo "</script>";
+			}  
 		}
 	  }
 	} else {
-	  echo "Invalid file";
-	}
-	
-	/*Insert values in boards table*/
-	if(($title != null) && ($description != null) && ($url != null) && ($file != null)) {
-	mysql_query("INSERT INTO tacks(bid, tack_title, tack_description, tack_category, tack_url, tack_image) VALUES('$board_id', '$title', '$description','$category_board', '$url', 'images/tack_image/$file')") or die(mysql_error());
-	
-	/*redirect user to board page*/
-	echo"<script type = 'text/javascript'>";
-	echo"window.location.href = 'http://itechcareers.com/cmpe203/board.php?board_id=".$board_id."'";
-	echo"</script>";
-	}
-	
-	/*error message*/
-	else
-	{
-	echo "<script type = 'text/javascript'>";
-	echo "alert('Please enter value in all fields!')";
-	echo "</script>";
+	  echo "<script type = 'text/javascript'>";
+	  echo "alert('Invalid Image!')";
+	  echo "</script>";
 	}
 }
 ?>
 
 <html>
-	
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v2.0
+  * @date     (17-April-2014)
+  * @Description  add tack page UI
+  -->	
 	<head>
 		<title>
 			Add Tack

@@ -10,7 +10,12 @@ $query = "SELECT * FROM boards WHERE id=$board_id";
 $result = mysql_query($query) or die(mysql_error());
 $row = mysql_fetch_array($result);
 
-/*on button press*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (25-April-2014)
+  * @Description  On button press
+  */
 if(isset($_POST['submit'])) {
 	
 	/*get values of all the textfields in variable*/
@@ -19,7 +24,13 @@ if(isset($_POST['submit'])) {
 	$category = $_POST['b_category'];
 	$privacy = $_POST['b_privacy'];
 	$file = $_FILES["file"]["name"];
-	$boardimage = $row['board_image'];
+	
+	if($privacy=='public') {
+		$privacy_value = 0;
+	}
+	else {
+		$privacy_value = 1;
+	}
 	
 	/*save board image to specified folder with validations*/
 	$allowedExts = array("gif", "jpeg", "jpg", "png");
@@ -43,52 +54,48 @@ if(isset($_POST['submit'])) {
 			echo "alert('Image already exists!')";
 			echo "</script>";
 		} else {
-		  move_uploaded_file($_FILES["file"]["tmp_name"],
-		  "images/board_images/" . $_FILES["file"]["name"]);
-		}
+				
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (23-April-2014)
+  * @Description  update values in board table when user has edited board
+  */
+				if(($title != null) && ($description != null) && ($category != null) && ($privacy != null) && ($file != null)) {
+				$result2 = mysql_query("UPDATE `boards` SET `uid`='$user_id', `board_title`='$title', `board_description`='$description', `board_category`='$category', `privacy`='$privacy_value', `board_url`='board.php', `board_image`='images/board_images/$file' WHERE id='$board_id'")or die(mysql_error());
+	
+					move_uploaded_file($_FILES["file"]["tmp_name"],
+					"images/board_images/" . $_FILES["file"]["name"]);
+	
+					/*redirect user to profile page*/
+					echo"<script type = 'text/javascript'>";
+					echo"window.location.href = 'http://itechcareers.com/cmpe203/profile.php'";
+					echo"</script>";
+				}
+	
+				/*error message*/
+				else{
+					echo "<script type = 'text/javascript'>";
+					echo "alert('Please enter values in all fields!')";
+					echo "</script>";
+				}
+			}
 	  }
 	} else {
-	  echo "Invalid file";
-	}
-	
-	if($privacy=='public') {
-		$privacy_value = 0;
-	}
-	else {
-		$privacy_value = 1;
-	}
-	
-	/*update values in board table when user has choosen a new image*/
-	if(($title != null) && ($description != null) && ($category != null) && ($privacy != null) && ($file != null)) {
-	$result2 = mysql_query("UPDATE `boards` SET `uid`='$user_id', `board_title`='$title', `board_description`='$description', `board_category`='$category', `privacy`='$privacy_value', `board_url`='board.php', `board_image`='images/board_images/$file' WHERE id='$board_id'")or die(mysql_error());
-	
-	/*redirect user to profile page*/
-	echo"<script type = 'text/javascript'>";
-	echo"window.location.href = 'http://itechcareers.com/cmpe203/profile.php'";
-	echo"</script>";
-	}
-	
-	/*update values in board table when user has not choosen a new image*/
-	else if(($title != null) && ($description != null) && ($category != null) && ($privacy != null) && ($file == null)) {
-	$result2 = mysql_query("UPDATE `boards` SET `uid`='$user_id', `board_title`='$title', `board_description`='$description', `board_category`='$category', `privacy`='$privacy_value', `board_url`='board.php', `board_image`='$boardimage' WHERE id='$board_id'")or die(mysql_error());
-	
-	/*redirect user to profile page*/
-	echo"<script type = 'text/javascript'>";
-	echo"window.location.href = 'http://itechcareers.com/cmpe203/profile.php'";
-	echo"</script>";
-	}
-	
-	/*error message*/
-	else{
-	echo "<script type = 'text/javascript'>";
-	echo "alert('Please enter values in all fields!')";
-	echo "</script>";
+	  echo "<script type = 'text/javascript'>";
+	  echo "alert('Invalid Image!')";
+	  echo "</script>";
 	}
 }
 ?>
 
 <html>
-	
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v2.0
+  * @date     (18-April-2014)
+  * @Description  add tack page UI
+  -->	
 	<head>
 		<title>
 			Edit Board

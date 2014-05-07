@@ -2,7 +2,12 @@
 session_start();
 include('db.php');
 
-/*on button press*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  on button press
+  */
 if(isset($_POST['register']))
 {
 	/*get values of textfields in variables*/
@@ -11,7 +16,14 @@ if(isset($_POST['register']))
 	$email = $_POST["email"];
 	$password = $_POST["password"];
 	
-	/*check if email is already registered by querying login table*/
+	if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+	
+/**
+  * @author  (Morvin Shah)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  check if email is already registered by querying login table
+  */
 	$result = mysql_query("SELECT * FROM login WHERE email ='$email'") or die(mysql_error());
 	$row = mysql_fetch_array($result);
 	
@@ -41,15 +53,27 @@ if(isset($_POST['register']))
 		echo "alert('Wrong Credentials! Please try again.')";
 		echo "</script>";
 	}
+	}
+	else{
+		echo "<script type = 'text/javascript'>";
+		echo "alert('Invalid Email.')";
+		echo "</script>";
+	}
 
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v2.0
+  * @date     (21-April-2014)
+  * @Description  change password page UI
+  -->
   <head>
     <meta charset="utf-8">
-    <title>Register to MyTacks</title>
+    <title>Register to CodeStack</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!--including css files-->
@@ -79,7 +103,7 @@ if(isset($_POST['register']))
 
         <div id="login-wraper">
             <form class="form login-form" action="register.php" method="post">
-                <legend>Sign up to <span class="blue"><b>MyTacks</b></span></legend>
+                <legend>Sign up to <span class="blue"><b>CodeStack</b></span></legend>
             
                 <div class="body" style="padding-bottom:10px;">
 					<table>

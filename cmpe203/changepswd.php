@@ -2,14 +2,24 @@
 include('header.php');
 include('db.php');
 
-/*on button press*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (25-April-2014)
+  * @Description  On button press
+  */
 if(isset($_POST['submit'])) {
 
 	/*get value of new password and confirm password into variables*/
 	$new_password = $_POST['new_password'];
 	$conf_password = $_POST['confirm_password'];
 	
-	/*update login table with new password if both values are same*/
+/**
+  * @author  (Amod Rege)
+  * @version  v1.0
+  * @date     (25-April-2014)
+  * @Description  update login table with new password if both values are same
+  */
 	if($new_password==$conf_password){
 		$result = mysql_query("UPDATE `login` SET `password`='$new_password' WHERE id='$user_id'")or die(mysql_error());
 		
@@ -28,7 +38,12 @@ if(isset($_POST['submit'])) {
 }
 ?>
 <html>
-	
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v2.0
+  * @date     (20-April-2014)
+  * @Description  change password page UI
+  -->		
 	<head>
 		<title>
 			Change Password

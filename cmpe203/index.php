@@ -2,13 +2,20 @@
 session_start();
 include('db.php');
 
-/*on login button press*/
+/**
+  * @author  (Archit Agarwal)
+  * @version  v1.0
+  * @date     (1-May-2014)
+  * @Description  On login button press
+  */
 if(isset($_POST['login']))
 {
 	/*get values of textfields in variables*/
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	
+	if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+     
 	/*check for user with given credentials*/
 	$result = mysql_query("SELECT * FROM login WHERE email ='$email'") or die(mysql_error());
 	$row = mysql_fetch_array($result);
@@ -27,15 +34,27 @@ if(isset($_POST['login']))
 	echo "alert('Wrong Credentials! Please try again.')";
 	echo "</script>";
 	}
+	}
+	else{
+		echo "<script type = 'text/javascript'>";
+		echo "alert('Invalid Email.')";
+		echo "</script>";
+	}
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v2.0
+  * @date     (21-April-2014)
+  * @Description  change password page UI
+  -->
   <head>
     <meta charset="utf-8">
-    <title>Welcome to MyTacks</title>
+    <title>Welcome to CodeStack</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<!--including css files-->
@@ -65,7 +84,7 @@ if(isset($_POST['login']))
 
         <div id="login-wraper">
             <form class="form login-form" action = "index.php" method = "post">
-                <legend>Sign in to <span class="blue"><b>MyTacks</b></span></legend>
+                <legend>Sign in to <span class="blue"><b>CodeStack</b></span></legend>
             
                 <div class="body">
                     <label>Email</label>

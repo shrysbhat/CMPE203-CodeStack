@@ -14,6 +14,12 @@ if($user_id == NULL)
 	<link rel="stylesheet" href="css/header.css">
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </head>
+<!--
+  * @author  (Pratik Gaglani)
+  * @version  v2.0
+  * @date     (19-April-2014)
+  * @Description  change password page UI
+  -->
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container" style="background-color:#48649F; padding:7px; width:100%;">
