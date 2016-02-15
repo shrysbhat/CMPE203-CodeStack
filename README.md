@@ -5,7 +5,7 @@ Team Members -
 
 Archit Agarwal
 Pratik Gaglani
-Lakshmi Ganesh Muthuluru
+Ganesh
 Amod Rege
 Shreyas Bhat
 Harsha Bandikallu
